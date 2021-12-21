@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem, 0;
+    max-width: 500px;
+    margin: auto;
+}
+
+li {
+    list-style: none;
+    padding: 0.5rem 0;
+}
+input {
+    margin-top: 0.2rem;
+}
+
+.form {
+    background-color: rgba(0,0,0,0.4);
+    padding: 2rem;
+    align-items: center;
+}
+.subform {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.btn {
+    border: none;
+    background-color: rgb(81, 81, 248);
+    color: #fff;
+    padding: 0.2rem 0.3rem;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.del-btn {
+    border: none;
+    background-color: rgb(81, 81, 248);
+    color: #fff;
+    padding: 0.15rem 0.3rem;
+    border-radius: 4px;
+}
+.del-btn:hover {
+    cursor: pointer;
+}
+.addform {
+    max-width: 500px;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+
+}
+
+.list {
+    text-align: start;
+    color: #fff;
+    max-width: 500px;
+    margin: auto;
+    font-size: 0.7rem;
+    padding-left: 0.3rem;
+}
+
+.displayform {
+    background-color: rgba(0,0,0,0.6);
+    max-width: 500px;
+    margin: auto;
+}
+
+.footer {
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+    color: #fff;
+    padding: 0.6rem;
+    font-size: 0.8rem;
+}
