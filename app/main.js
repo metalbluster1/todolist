@@ -1,30 +1,73 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
+const usingState = React.useState
+
+const data = () => {
+    let localData = localStorage.getItem('list')
+    console.log(localData)
+    if (localData) {
+        return JSON.parse(localData)
+    }
+    else {
+        return []
+    }
+}
+
 function OurApp() {
-
-    const [info, setInfo] = useState([])
-
-    // only run once the first time
+    const [list, setList] = usingState(data)
     useEffect(() => {
-        if (localStorage.getItem("eventdata")) {
-            setInfo(JSON.parse(localStorage.getItem("eventdata")))
-        }
-    }, [])
-
-    // Every time loading
-    useEffect(() => {
-        localStorage.setItem("eventdata", JSON.stringify(info))
-    }, [info])
-
+        localStorage.setItem('list', JSON.stringify(list))
+    }, [list])
     return (
         <div>
             <Header />
-            <Form setInfo={setInfo} />
-            <ul>
-                {info.map(i => <AddForm setInfo={setInfo} id={i.id} event={i.event} date={i.date} key={i.id} />)}
+            <AddForm setList={setList} />
+            <ul className="container list">
+                {list.map(l => <NewList setList={setList} name={l.name} id={l.id} key={l.id} />)}
             </ul>
             <Footer />
+        </div>
+    )
+}
+
+function AddForm(props) {
+
+    const [name, setName] = usingState()
+    function handleSubmit(e) {
+        e.preventDefault()
+        props.setList(prev => prev.concat({ name, id: Date.now() }))
+        setName("")
+    }
+
+    return (
+        <form className="container form" onSubmit={handleSubmit}>
+            <label className="label">Things to do</label><br></br>
+            <input className="input" value={name} onChange={e => setName(e.target.value)} required></input>
+            <button className="btn">Add</button>
+        </form>
+    )
+}
+
+
+
+function NewList(props) {
+
+    function handleDelete() {
+        props.setList(prev => prev.filter(list => list.id != props.id))
+    }
+
+    return (
+        <li className="element"><i className="fas fa-angle-right"></i> {props.name}
+            <button className="btn btn-del" onClick={handleDelete}>Delete</button>
+        </li>
+    )
+}
+
+function Footer() {
+    return (
+        <div>
+            <p className="footer container">All rights reserved &copy;</p>
         </div>
     )
 }
@@ -32,70 +75,9 @@ function OurApp() {
 function Header() {
     return (
         <div>
-            <h1 className='header'>To Do List</h1>
+            <h1 className="header container">To Do List</h1>
         </div>
     )
 }
 
-function Form(props) {
-
-
-
-    const [event, setEvent] = useState()
-    const [date, setDate] = useState()
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        props.setInfo(prev => prev.concat({ event, date, id: Date.now() }))
-        console.log(event)
-        setEvent("")
-        setDate("")
-
-    }
-
-    return (
-        <form onSubmit={handleSubmit} className='subform form'>
-            <li>
-                <label>Event Name</label><br></br>
-                <input value={event} onChange={e => setEvent(e.target.value)} type='text' name='text' placeholder='Event' />
-            </li>
-            <li>
-                <label>Date</label><br></br>
-                <input value={date} onChange={e => setDate(e.target.value)} type='date' name='date' />
-            </li>
-            <button className='btn'>Submit</button>
-        </form>
-    )
-}
-
-function AddForm(props) {
-
-    function handleDelete() {
-        props.setInfo(prev => prev.filter(info => info.id != props.id))
-    }
-
-    return (
-        <div className='displayform'>
-            <ul className='addform'>
-                <li className='list'><h3>{props.event} event remainder | Date: {props.date}</h3>
-
-                </li>
-                <li>
-                    <button className='del-btn' onClick={handleDelete}>Delete</button>
-                </li>
-            </ul>
-
-
-        </div>
-    )
-}
-
-function Footer() {
-    return (
-        <div>
-            <h3 className='footer'><span>&reg;</span> All Rights Reserved</h3>
-        </div>
-    )
-}
-
-ReactDOM.render(<OurApp />, document.querySelector("#app"))
+ReactDOM.render(<OurApp />, document.querySelector("#root"))
