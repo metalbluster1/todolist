@@ -37,42 +37,42 @@ if (currentTash == 'dev') {
 if (currentTash == 'build') {
     config.output = {
         publicPath: "/",
-        path: path.resolve(__dirname, "build"),
+        path: path.resolve(__dirname, "docs"),
         filename: "bundled.js"
     }
     config.mode = 'production'
 
 }
 
-module.exports = {
-    entry: "./app/Main.js",
-    output: {
-        publicPath: "/",
-        path: path.resolve(__dirname, "app"),
-        filename: "bundled.js"
-    },
-    mode: "build",
-    devtool: "source-map",
-    devServer: {
-        port: 3000,
-        contentBase: path.join(__dirname, "app"),
-        hot: true,
-        historyApiFallback: { index: "index.html" }
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-react", ["@babel/preset-env", { targets: { node: "12" } }]]
-                    }
-                }
-            }
-        ]
-    }
-}
+// module.exports = {
+//     entry: "./app/Main.js",
+//     output: {
+//         publicPath: "/",
+//         path: path.resolve(__dirname, "app"),
+//         filename: "bundled.js"
+//     },
+//     mode: "build",
+//     devtool: "source-map",
+//     devServer: {
+//         port: 3000,
+//         contentBase: path.join(__dirname, "app"),
+//         hot: true,
+//         historyApiFallback: { index: "index.html" }
+//     },
+//     module: {
+//         rules: [
+//             {
+//                 test: /\.js$/,
+//                 exclude: /(node_modules)/,
+//                 use: {
+//                     loader: "babel-loader",
+//                     options: {
+//                         presets: ["@babel/preset-react", ["@babel/preset-env", { targets: { node: "12" } }]]
+//                     }
+//                 }
+//             }
+//         ]
+//     }
+// }
 
 module.exports = config
