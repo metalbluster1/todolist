@@ -33,7 +33,7 @@ function OurApp() {
 
 function AddForm(props) {
 
-    const [name, setName] = usingState()
+    const [name, setName] = usingState("")
     function handleSubmit(e) {
         e.preventDefault()
         props.setList(prev => prev.concat({ name, id: Date.now() }))
